@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proyecto Redes - Grupo Bonice</title>
+    <style>
+        body {
+            background-color: #000;
+            color: #0f0;
+            font-family: 'Courier New', monospace;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            text-align: center;
+            padding: 20px 0;
+            border-bottom: 1px solid #0f0;
+            position: relative;
+        }
+        
+        h1 {
+            font-size: 3em;
+            margin: 0;
+            text-shadow: 0 0 10px #0f0;
+        }
+        
+        .matrix-effect {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+            opacity: 0.2;
+        }
+
+        .container-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin-top: 40px;
+        }
+        
+        .node-container {
+            background-color: rgba(0, 50, 0, 0.3);
+            padding: 20px;
+            border: 1px solid #0f0;
+            text-align: center;
+            transition: all 0.3s;
+        }
+        
+        .node-container:hover {
+            box-shadow: 0 0 15px #0f0;
+            transform: translateY(-5px);
+        }
+        
+        .node-container h2 {
+            margin-top: 0;
+            border-bottom: 1px solid #0f0;
+            padding-bottom: 10px;
+        }
+        
+        .ip-address {
+            font-size: 1.2em;
+            margin: 15px 0;
+        }
+        
+        .terminal {
+            background-color: #000;
+            border: 1px solid #0f0;
+            padding: 15px;
+            font-family: 'Courier New', monospace;
+            color: #0f0;
+            height: 200px;
+            overflow-y: auto;
+            margin: 40px 0;
+        }
+        
+        .blinking-cursor {
+            animation: blink 1s infinite;
+        }
+        
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+        
+        footer {
+            text-align: center;
+            padding: 20px 0;
+            margin-top: 40px;
+            border-top: 1px solid #0f0;
+        }
+        
+        .action-button {
+            background-color: transparent;
+            color: #0f0;
+            border: 1px solid #0f0;
+            padding: 12px 25px;
+            font-size: 1.2em;
+            font-family: 'Courier New', monospace;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: block;
+            margin: 30px auto;
+            text-decoration: none;
+            width: max-content;
+        }
+        
+        .action-button:hover {
+            background-color: #0f0;
+            color: #000;
+            box-shadow: 0 0 10px #0f0;
+        }
+        
+        .glitch {
+            position: relative;
+        }
+        
+        .glitch::before, .glitch::after {
+            content: attr(data-text);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        
+        .glitch::before {
+            left: 2px;
+            text-shadow: -1px 0 red;
+            animation: glitch-1 2s infinite linear alternate-reverse;
+        }
+        
+        .glitch::after {
+            left: -2px;
+            text-shadow: 1px 0 blue;
+            animation: glitch-2 2s infinite linear alternate-reverse;
+        }
+        
+        @keyframes glitch-1 {
+            0%, 100% { clip-path: inset(50% 0 50% 0); }
+            20% { clip-path: inset(0 0 20% 0); }
+            40% { clip-path: inset(40% 0 60% 0); }
+            60% { clip-path: inset(20% 0 40% 0); }
+            80% { clip-path: inset(60% 0 80% 0); }
+        }
+        
+        @keyframes glitch-2 {
+            0%, 100% { clip-path: inset(20% 0 40% 0); }
+            20% { clip-path: inset(60% 0 80% 0); }
+            40% { clip-path: inset(0 0 20% 0); }
+            60% { clip-path: inset(40% 0 60% 0); }
+            80% { clip-path: inset(50% 0 50% 0); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="matrix-effect" id="matrix"></div>
+            <h1 class="glitch" data-text="Proyecto Redes">Proyecto Redes</h1>
+            <p>Grupo Bonice</p>
+        </header>
+        
+        <div class="terminal" id="terminal">
+            <div>> iniciando conexión con servidores...</div>
+            <div>> verificando red...</div>
+            <div>> acceso concedido</div>
+            <div>> buscando equipos disponibles...</div>
+            <div>> 4 equipos encontrados</div>
+            <div>> mostrando información...</div>
+            <div>> <span class="blinking-cursor">█</span></div>
+        </div>
+        
+        <div class="container-grid">
+            <div class="node-container">
+                <h2>Samuel Pico</h2>
+                <div class="ip-address">10.43.101.6</div>
+            </div>
+            
+            <div class="node-container">
+                <h2>Juan José Ballesteros</h2>
+                <div class="ip-address">10.43.100.148</div>
+            </div>
+            
+            <div class="node-container">
+                <h2>Andrés Diaz</h2>
+                <div class="ip-address">10.43.100.183</div>
+            </div>
+            
+            <div class="node-container">
+                <h2>Samuel Manrique</h2>
+                <div class="ip-address">10.43.100.218</div>
+            </div>
+        </div>
+        
+        <a href="https://www.google.com" target="_blank" class="action-button">Acceder al documento</a>
+        
+        <footer>
+            <p>Proyecto Redes - Grupo Bonice © 2025</p>
+        </footer>
+    </div>
+    
+    <script>
+        // Efecto Matrix para el fondo
+        const canvas = document.createElement('canvas');
+        canvas.width = window.innerWidth;
+        canvas.height = 200;
+        document.getElementById('matrix').appendChild(canvas);
+        
+        const ctx = canvas.getContext('2d');
+        const characters = "01アァカサタナハマヤャラワガザダバパイィキシチニヒミリヰギジヂビピウゥクスツヌフムユュルグズブヅプエェケセテネヘメレヱゲゼデベペオォコソトノホモヨョロヲゴゾドボポヴッン";
+        const columns = canvas.width / 15;
+        const drops = [];
+        
+        // Inicializar las gotas
+        for (let i = 0; i < columns; i++) {
+            drops[i] = Math.floor(Math.random() * canvas.height);
+        }
+        
+        function drawMatrix() {
+            ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            
+            ctx.fillStyle = "#0f0";
+            ctx.font = "15px monospace";
+            
+            for (let i = 0; i < drops.length; i++) {
+                const text = characters.charAt(Math.floor(Math.random() * characters.length));
+                ctx.fillText(text, i * 15, drops[i] * 15);
+                
+                if (drops[i] * 15 > canvas.height && Math.random() > 0.975) {
+                    drops[i] = 0;
+                }
+                
+                drops[i]++;
+            }
+        }
+        
+        // Efecto de terminal adicional
+        const terminal = document.getElementById('terminal');
+        const terminalLines = [
+            "$ ping 192.168.22.62",
+            "$ respuesta desde 192.168.22.62: tiempo=2ms TTL=64",
+            "$ ping 192.168.22.61",
+            "$ respuesta desde 192.168.22.61: tiempo=3ms TTL=64",
+            "$ verificando conexiones...",
+            "$ red estable y operativa",
+            "$ todos los equipos conectados al sistema"
+        ];
+        
+        let lineIndex = 0;
+        
+        function addTerminalLine() {
+            if (lineIndex < terminalLines.length) {
+                const newLine = document.createElement('div');
+                newLine.textContent = terminalLines[lineIndex];
+                terminal.appendChild(newLine);
+                terminal.scrollTop = terminal.scrollHeight;
+                lineIndex++;
+                setTimeout(addTerminalLine, Math.random() * 1000 + 500);
+            } else {
+                const promptLine = document.createElement('div');
+                promptLine.innerHTML = "$ <span class='blinking-cursor'>█</span>";
+                terminal.appendChild(promptLine);
+                terminal.scrollTop = terminal.scrollHeight;
+            }
+        }
+        
+        // Iniciar animaciones
+        setInterval(drawMatrix, 50);
+        setTimeout(addTerminalLine, 2000);
+    </script>
+</body>
+</html>

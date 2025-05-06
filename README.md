@@ -29,7 +29,7 @@ index.html  – Single‐page demo with embedded styles and scripts&#x20;
    ```bash
    sudo apt update
    sudo apt install apache2
-````
+   ```
 
 2. Enable and start the Apache service:
    ```bash

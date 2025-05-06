@@ -1,7 +1,7 @@
 # 💻 Network Project – Grupo Bonice (Apache Demo)
 
 ## 🚀 Overview
-This HTML file was developed as a **test of an internal Apache web server on Ubuntu**. It’s a single‐page demo that combines a Matrix-style canvas effect, an animated terminal simulation, and a grid of network nodes with fictitious IP addresses :contentReference[oaicite:0]{index=0}:contentReference[oaicite:1]{index=1}.
+This HTML file was developed as a **test of an internal Apache web server on Ubuntu**. It’s a single‐page demo that combines a Matrix-style canvas effect, an animated terminal simulation, and a grid of network nodes with fictitious IP addresses.
 
 ## ✨ Features
 - 🎇 Matrix effect rendered via the Canvas API  
